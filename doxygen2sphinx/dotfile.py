@@ -53,8 +53,6 @@ class Dotfile(object):
             with open(outfile, 'w') as g:
                 g.write(''.join(lines))
 
-            # return ''.join(lines)
-
     def get_url(self, html_files):
         """Get the Sphinx URL that corresponds to the ``digraph`` attribute.
 
@@ -91,41 +89,10 @@ class Dotfile(object):
             url = matches.group('url')
             if self.url:
                 return line.replace(url, self.url)
-            # matches_hash = REGEX_HASH.search(url)
-            # if matches_hash:
-            #    hash_ = matches_hash.group('hash')
-            #    if hash_ in digraphs and :
-            #        return line.replace(url, self.url)
 
             return line.replace(', URL="', ',URL="').replace(',URL="{}"'.format(url), '')
 
         return line
-
-
-'''def _replace_url(line, digraphs):
-    """Replace the Doxygen URL in ``line`` with Sphinx URLs.
-
-    Parameters
-    ----------
-    line : str
-        The contents of a dot file
-    digraphs : dict
-        A dictionary where the keys are hashes and the values are Python functions, classes, methods, etc.
-
-    """
-    matches = REGEX_URL.search(line)
-    if matches:
-        url = matches.group('url')
-        matches_hash = REGEX_HASH.search(url)
-        if matches_hash:
-            hash_ = matches_hash.group('hash')
-            if hash_ in digraphs:
-                return line.replace(url, digraphs[hash_])
-
-            #return line.replace(url, 'TEST')
-            return line.replace(', URL="', ',URL="').replace(',URL="{}"'.format(url), '')
-
-    return line'''
 
 
 def _get_longest_match(digraph, html_files):

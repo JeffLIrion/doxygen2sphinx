@@ -44,42 +44,5 @@ class Converter(object):
         html_files = [os.path.basename(html_file)[:-5] for html_file in glob.glob(self.sphinx_dir + '/build/html/*.html')]
         print(html_files)
         for df in self.dotfiles:
-            # outfile = '{0}.html#{1}'.format(_get_longest_match(df.digraph, html_files), df.digraph)
             outfile = os.path.join(self.sphinx_dir, 'source', '_static', '{0}.{1}.dot'.format(df.digraph, 'CALLER_GRAPH' if df.infile.endswith('icgraph.dot') else 'CALL_GRAPH'))
             df.convert(outfile)
-            # print('\n{0}\n{1}\n{2}\n\n'.format(outfile, '-'*len(outfile), '\n  '.join(result.split())))
-            # print(result)
-
-
-'''def _get_longest_match(digraph, html_files):
-    """Find the longest match between ``digraph`` and the contents of ``html_files``.
-
-    Parameters
-    ----------
-    digraph : str
-        The ``digraph`` attribute of a `Dotfile` object
-    html_files : list
-        A list of the Sphinx html files
-
-    Returns
-    -------
-    str
-        The html file with the longest match with ``digraph``
-
-    """
-    print(digraph)
-    print(html_files)
-    max_match_len = 0
-    len_max_match = 0
-    longest_match = None
-
-    for html_file in html_files:
-        for i, (d, ht) in enumerate(zip(digraph, html_file)):
-            if d != ht or i == len(html_file)-1:
-                if i > max_match_len or (i == max_match_len and len(html_file) < len_max_match):
-                    longest_match = html_file
-                    max_match_len = i
-                    len_max_match = len(html_file)
-                break
-
-    return longest_match'''
