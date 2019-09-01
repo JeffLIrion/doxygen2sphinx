@@ -45,7 +45,7 @@ class Converter(object):
         print(html_files)
         for df in self.dotfiles:
             # outfile = '{0}.html#{1}'.format(_get_longest_match(df.digraph, html_files), df.digraph)
-            outfile = os.path.join(self.sphinx_dir, 'source', '_static', '{0}.{1}.dot'.format(df.digraph, 'CALL_GRAPH' if df.infile.endswith('cgraph.dot') else 'CALLER_GRAPH'))
+            outfile = os.path.join(self.sphinx_dir, 'source', '_static', '{0}.{1}.dot'.format(df.digraph, 'CALLER_GRAPH' if df.infile.endswith('icgraph.dot') else 'CALL_GRAPH'))
             df.convert(outfile)
             # print('\n{0}\n{1}\n{2}\n\n'.format(outfile, '-'*len(outfile), '\n  '.join(result.split())))
             # print(result)
