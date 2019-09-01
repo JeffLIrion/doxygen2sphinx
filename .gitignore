@@ -1,0 +1,13 @@
+# Python files
+*.idea
+*.pyc
+**/__pycache__/
+doxygen2sphinx.egg-info
+
+# Build files
+build/
+dist/
+
+# Documentation
+docs/build/
+docs/html/
