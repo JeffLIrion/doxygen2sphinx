@@ -50,7 +50,10 @@ class Dotfile(object):
                     lines[i] = self._replace_url(line)
 
             print("\n- [{0}] {1}: {2}\n".format(outfile, self.digraph, self.url))
-            return ''.join(lines)
+            with open(outfile, 'w') as g:
+                g.write(''.join(lines))
+
+            # return ''.join(lines)
 
     def get_url(self, html_files):
         """Get the Sphinx URL that corresponds to the ``digraph`` attribute.
