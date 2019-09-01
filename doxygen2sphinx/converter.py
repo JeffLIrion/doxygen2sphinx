@@ -24,12 +24,13 @@ class Converter(object):
     def __init__(self, doxygen_dir, sphinx_dir):
         self.doxygen_dir = doxygen_dir
         self.sphinx_dir = sphinx_dir
+
         self.dotfiles = []
         self.hashes = {}
         self.urls = {}
 
     def _get_attributes(self):
-        """Find the .dot files in ``self.doxygen_dir`` and fill in the ``self.dotfiles``, ``self.hashes``, and ``self.urls`` attribute."""
+        """Find the .dot files in ``self.doxygen_dir`` and fill in the ``self.dotfiles``, ``self.hashes``, and ``self.urls`` attributes."""
         dot_files = glob.glob(self.doxygen_dir + '/**/*.dot', recursive=True)
         self.dotfiles = [Dotfile(df) for df in dot_files]
         self.hashes = {d.hash: d for d in self.dotfiles}

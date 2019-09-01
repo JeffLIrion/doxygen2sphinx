@@ -102,7 +102,7 @@ def _get_longest_match(digraph, html_files):
     Parameters
     ----------
     digraph : str
-        The ``digraph`` attribute of a `Dotfile` object
+        The ``digraph`` attribute of a :py:class:`Dotfile` object
     html_files : list
         A list of the Sphinx html files
 
@@ -136,7 +136,7 @@ def _replace_url(line, hashes):
     line : str
         The line in the dot file
     hashes : dict
-        A dictionary where the keys are the hashes and the values are the `Dotfile` objects
+        A dictionary where the keys are the hashes and the values are the :py:class:`Dotfile` objects
 
     """
     matches = REGEX_URL.search(line)
