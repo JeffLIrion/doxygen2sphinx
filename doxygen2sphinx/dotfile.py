@@ -34,22 +34,23 @@ class Dotfile(object):
     def __eq__(self, other):
         return self.infile == other.infile and self.hash == other.hash and self.digraph == other.digraph
 
-    def convert(self, outfile):
+    def convert(self, outfile, hashes):
         """Convert the URLs from Doxygen format to Sphinx format.
 
         Parameters
         ----------
         outfile : str
             Where the converted .dot file will be saved
+        hashes : dict
+            A dictionary where the keys are the hashes and the values are the `Dotfile` objects
 
         """
         with open(self.infile) as f:
             lines = f.readlines()
             for i, line in enumerate(lines):
                 if 'URL=' in line:
-                    lines[i] = self._replace_url(line)
+                    lines[i] = _replace_url(line, hashes)
 
-            print("\n- [{0}] {1}: {2}\n".format(outfile, self.digraph, self.url))
             with open(outfile, 'w') as g:
                 g.write(''.join(lines))
 
@@ -70,7 +71,7 @@ class Dotfile(object):
         html_file = _get_longest_match(self.digraph, html_files)
 
         if html_file:
-            self.url = '{0}.html#{1}'.format(html_file, self.digraph)
+            self.url = '../{0}.html#{1}'.format(html_file, self.digraph)
         else:
             self.url = None
         return self.url
@@ -125,3 +126,30 @@ def _get_longest_match(digraph, html_files):
                 break
 
     return longest_match
+
+
+def _replace_url(line, hashes):
+    """Replace the Doxygen URL in ``line`` with a Sphinx URL.
+
+    Parameters
+    ----------
+    line : str
+        The line in the dot file
+    hashes : dict
+        A dictionary where the keys are the hashes and the values are the `Dotfile` objects
+
+    """
+    matches = REGEX_URL.search(line)
+    if matches:
+        url = matches.group('url')
+
+        hash_matches = REGEX_HASH.search(url)
+        if hash_matches:
+            hash_ = hash_matches.group('hash')
+            dotfile = hashes.get(hash_)
+            if dotfile and dotfile.url:
+                return line.replace(url, dotfile.url)
+
+        return line.replace(', URL="', ',URL="').replace(',URL="{}"'.format(url), '')
+
+    return line

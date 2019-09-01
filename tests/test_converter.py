@@ -22,8 +22,8 @@ ICGRAPH = os.path.join(os.path.dirname(__file__), 'data', 'doxygen', 'd7', 'ddb'
 
 DOTFILES = [Dotfile(CGRAPH), Dotfile(ICGRAPH)]
 
-DIGRAPHS = {'a003266da034244516954809091e43666': 'adb.adb_commands.AdbCommands.ConnectDevice',
-            'a0e16b280f809807c126e5ea0ba0ce63b': 'adb.adb_commands.AdbCommands.StreamingShell'}
+HASHES = {'a003266da034244516954809091e43666': Dotfile(CGRAPH),
+          'a0e16b280f809807c126e5ea0ba0ce63b': Dotfile(ICGRAPH)}
 
 class TestConverter(unittest.TestCase):
     def setUp(self):
@@ -36,7 +36,7 @@ class TestConverter(unittest.TestCase):
 
     def test_get_digraphs(self):
         self.converter._get_attributes()
-        self.assertDictEqual(self.converter.digraphs, DIGRAPHS)
+        self.assertDictEqual(self.converter.hashes, HASHES)
         self.assertListEqual(sorted(self.converter.dotfiles, key=lambda x: x.infile), sorted(DOTFILES, key=lambda x: x.infile))
 
     def test_convert(self):
