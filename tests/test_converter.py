@@ -14,7 +14,6 @@ from doxygen2sphinx.dotfile import Dotfile
 
 
 DOXYGEN_DIR = os.path.join(os.path.dirname(__file__), 'data', 'doxygen')
-#SPHINX_DIR = os.path.join(os.path.dirname(__file__), 'data', 'sphinx', 'source', '_static')
 SPHINX_DIR = os.path.join(os.path.dirname(__file__), 'data', 'sphinx')
 
 CGRAPH = os.path.join(os.path.dirname(__file__), 'data', 'doxygen', 'd7', 'ddb', 'classadb_1_1adb__commands_1_1AdbCommands_a003266da034244516954809091e43666_cgraph.dot')
@@ -31,8 +30,6 @@ class TestConverter(unittest.TestCase):
 
     def test_init(self):
         self.assertTrue(True)
-        #self.assertEqual('adb.adb_commands.AdbCommands.ConnectDevice', self.dotfile.digraph)
-        #self.assertEqual('a003266da034244516954809091e43666', self.dotfile.hash)
 
     def test_get_digraphs(self):
         self.converter._get_attributes()
