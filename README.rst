@@ -55,6 +55,6 @@ Usage
    .. code-block:: bash
 
       for dotfile in $(ls *.dot); do
-          echo "dot -Tsvg $dotfile -o ${dotfile%dot}svg"
+          dot -Tsvg $dotfile -o "${dotfile%dot}svg"
       done
 
