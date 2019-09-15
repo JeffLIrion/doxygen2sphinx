@@ -50,3 +50,11 @@ Usage
       c = Converter(doxygen_dir, sphinx_dir)
       c.convert()
 
+4. To convert the .dot files to, say, .svg format:
+
+   .. code-block:: bash
+
+      for dotfile in $(ls *.dot); do
+          echo "dot -Tsvg $dotfile -o ${dotfile%dot}svg"
+      done
+
